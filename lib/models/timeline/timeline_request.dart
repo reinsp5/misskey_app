@@ -3,6 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'timeline_request.freezed.dart';
 part 'timeline_request.g.dart';
 
+// ignore_for_file: invalid_annotation_target
 @freezed
 class TimelineRequest with _$TimelineRequest {
   factory TimelineRequest({
