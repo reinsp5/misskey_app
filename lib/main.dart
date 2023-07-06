@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:misskey_client/view/auth_page.dart';
+import 'package:misskey_client/view/callback_page.dart';
+import 'package:misskey_client/widget/mi_scafford.dart';
 
 void main() {
   runApp(
@@ -31,7 +33,7 @@ final _router = GoRouter(
         path: '/callback',
         builder: (context, state) {
           final session = state.queryParameters['session'] ?? '';
-          return AuthPage(
+          return CallbackPage(
             sessionId: session,
           );
         }),
@@ -64,16 +66,8 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        title: Text(
-          'Misskey App',
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.surface,
-          ),
-        ),
-      ),
+    return MiScaffold(
+      title: 'Misskey App',
       body: Center(
         child: ElevatedButton(
           onPressed: () {

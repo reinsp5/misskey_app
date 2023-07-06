@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:misskey_client/service/auth_service.dart';
 import 'package:misskey_client/service/misskey_api.dart';
+import 'package:misskey_client/widget/mi_scafford.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:uuid/uuid.dart';
 
@@ -27,16 +28,8 @@ class AuthPage extends ConsumerWidget {
         await ref.read(authServiceProvider).saveToken(token: value.token);
       });
     }
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "認証",
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.surface,
-          ),
-        ),
-        backgroundColor: Theme.of(context).colorScheme.primary,
-      ),
+    return MiScaffold(
+      title: "認証",
       body: Center(
         child: TextButton(
           child: const Text("認証する"),
