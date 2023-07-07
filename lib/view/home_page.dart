@@ -1,0 +1,45 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:misskey_client/state/misskey_api_state.dart';
+import 'package:misskey_client/widget/mi_scafford.dart';
+
+class HomePage extends ConsumerWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final timelines = ref.watch(misskeyTimelineNotifierProvider);
+    return MiScaffold(
+      title: 'Misskey App',
+      body: timelines.when(
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (error, stackTrace) => Center(
+          child: Text('エラーが発生しました。$error'),
+        ),
+        data: (data) => RefreshIndicator(
+          child: Padding(
+            padding:
+                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+            child: ListView.separated(
+              separatorBuilder: (context, index) => const Divider(),
+              itemCount: data.length,
+              itemBuilder: (context, index) {
+                final note = data[index];
+                return ListTile(
+                  leading: CircleAvatar(
+                    backgroundImage: NetworkImage(note.user.avatarUrl ?? ''),
+                  ),
+                  title: Text(note.user.name ?? ''),
+                  subtitle: Text(note.text ?? ''),
+                );
+              },
+            ),
+          ),
+          onRefresh: () async {
+            ref.read(misskeyTimelineNotifierProvider.notifier).reload();
+          },
+        ),
+      ),
+    );
+  }
+}

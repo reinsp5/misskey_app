@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:misskey_client/view/auth_page.dart';
 import 'package:misskey_client/view/callback_page.dart';
-import 'package:misskey_client/widget/mi_scafford.dart';
+import 'package:misskey_client/view/home_page.dart';
 
 void main() {
   runApp(
@@ -57,25 +57,6 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       routerConfig: _router,
-    );
-  }
-}
-
-class HomePage extends ConsumerWidget {
-  const HomePage({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return MiScaffold(
-      title: 'Misskey App',
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            context.go('/auth');
-          },
-          child: const Text('認証する'),
-        ),
-      ),
     );
   }
 }

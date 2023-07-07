@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:misskey_client/models/auth/check_auth_response.dart';
+import 'package:misskey_client/models/meta/meta_response.dart';
 import 'package:misskey_client/models/note/note.dart';
 import 'package:misskey_client/models/timeline/timeline_request.dart';
 import 'package:retrofit/http.dart';
@@ -16,14 +16,15 @@ abstract class MisskeyApi {
 
   @POST('/api/notes/hybrid-timeline')
   Future<List<Note>> getHybridTimeline(@Body() TimelineRequest request);
+
+  @POST('/api/meta')
+  Future<MetaResponse> getMeta();
 }
 
 class MisskeyApiFactory {
   MisskeyApi create(String baseUrl) {
-    return MisskeyApi(Dio(), baseUrl: baseUrl);
+    Dio dio = Dio();
+    dio.options.headers['content-type'] = 'application/json';
+    return MisskeyApi(dio, baseUrl: baseUrl);
   }
 }
-
-final misskeyApiFactoryProvider = Provider((ref) {
-  return MisskeyApiFactory();
-});

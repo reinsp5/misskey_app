@@ -24,7 +24,8 @@ dependencies:
   uuid:
   flutter_secure_storage:
   go_router:
-
+  flutter_widget_from_html_core:
+  flutter_widget_from_html:
 
 dev_dependencies:
   flutter_test:
