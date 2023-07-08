@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -17,7 +19,7 @@ class CallbackPage extends ConsumerWidget {
       loading: () => const CircularProgressIndicator(),
       error: (e, s) => Text('Error: $e'),
       data: (token) {
-        debugPrint('token: ${token.toJson()}');
+        log('token: ${token.toJson()}');
         ref.read(authServiceNotifierProvider).saveToken(token: token.token);
         return Padding(
           padding: const EdgeInsets.only(

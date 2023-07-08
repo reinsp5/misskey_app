@@ -1,17 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-import 'package:misskey_client/service/auth_service.dart';
-import 'package:misskey_client/view/auth_page.dart';
-import 'package:misskey_client/view/callback_page.dart';
-import 'package:misskey_client/view/home_page.dart';
-
-String? authToken = '';
+import 'package:misskey_client/state/router_state.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  AuthService authService = AuthService();
-  authToken = await authService.getToken();
   runApp(
     const ProviderScope(
       child: MyApp(),
@@ -19,44 +10,14 @@ void main() async {
   );
 }
 
-// ルート定義
-final _router = GoRouter(
-  initialLocation: '/',
-  routes: <RouteBase>[
-    GoRoute(
-      path: '/',
-      builder: (context, state) {
-        return const HomePage();
-      },
-      redirect: (context, state) {
-        if (authToken == '') {
-          return '/auth';
-        }
-        return null;
-      },
-    ),
-    GoRoute(
-      path: '/auth',
-      builder: (context, state) {
-        return const AuthPage();
-      },
-    ),
-    GoRoute(
-        path: '/callback',
-        builder: (context, state) {
-          final session = state.queryParameters['session'] ?? '';
-          return CallbackPage(
-            sessionId: session,
-          );
-        }),
-  ],
-);
-
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // ルーターを取得する
+    final router = ref.watch(appRouterNotifierProvider);
+
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Misskey App',
@@ -68,7 +29,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      routerConfig: _router,
+      routerConfig: router,
     );
   }
 }
