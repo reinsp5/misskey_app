@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:misskey_client/service/auth_service.dart';
 import 'package:misskey_client/state/misskey_api_state.dart';
@@ -15,8 +16,6 @@ class AppRouterNotifier extends _$AppRouterNotifier {
   @override
   GoRouter build() {
     final auth = ref.watch(authServiceProvider);
-    final misskeyApi =
-        ref.watch(misskeyApiNotifierProvider('https://misskey.io'));
     return GoRouter(
       initialLocation: '/',
       routes: <RouteBase>[
@@ -30,13 +29,7 @@ class AppRouterNotifier extends _$AppRouterNotifier {
             final token = await auth.getToken();
             // 認証未済の場合は認証画面へリダイレクト
             if (token == null) {
-              log('tokenがnull：$token');
-              return '/auth';
-            }
-            // トークンが無効な場合は認証画面へリダイレクト
-            final checkAuth = await misskeyApi.checkAuth(token);
-            if (!checkAuth.ok) {
-              log('認証失敗：$checkAuth');
+              debugPrint('tokenがnull：$token');
               return '/auth';
             }
             return null;
@@ -54,6 +47,7 @@ class AppRouterNotifier extends _$AppRouterNotifier {
             path: '/callback',
             builder: (context, state) {
               final session = state.queryParameters['session'] ?? '';
+              debugPrint('session: $session');
               return CallbackPage(
                 sessionId: session,
               );

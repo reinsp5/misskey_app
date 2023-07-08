@@ -19,11 +19,15 @@ class _MisskeyApi implements MisskeyApi {
   String? baseUrl;
 
   @override
-  Future<CheckAuthResponse> checkAuth(String session) async {
+  Future<CheckAuthResponse> checkAuth(
+    String session,
+    Map<String, dynamic> body,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(body);
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<CheckAuthResponse>(Options(
       method: 'POST',
@@ -127,6 +131,33 @@ class _MisskeyApi implements MisskeyApi {
     var value = _result.data!
         .map((dynamic i) => Emoji.fromJson(i as Map<String, dynamic>))
         .toList();
+    return value;
+  }
+
+  @override
+  Future<User> getMyProfile(MyProfileRequest request) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = request;
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<User>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/i',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = User.fromJson(_result.data!);
     return value;
   }
 

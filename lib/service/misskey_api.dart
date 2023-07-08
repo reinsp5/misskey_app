@@ -4,6 +4,8 @@ import 'package:misskey_client/models/emoji/emoji.dart';
 import 'package:misskey_client/models/meta/meta_response.dart';
 import 'package:misskey_client/models/note/note.dart';
 import 'package:misskey_client/models/timeline/timeline_request.dart';
+import 'package:misskey_client/models/user/my_profile_request.dart';
+import 'package:misskey_client/models/user/user.dart';
 import 'package:retrofit/http.dart';
 
 part 'misskey_api.g.dart';
@@ -13,7 +15,8 @@ abstract class MisskeyApi {
   factory MisskeyApi(Dio dio, {String baseUrl}) = _MisskeyApi;
 
   @POST("/api/miauth/{session}/check")
-  Future<CheckAuthResponse> checkAuth(@Path() String session);
+  Future<CheckAuthResponse> checkAuth(
+      @Path() String session, @Body() Map<String, dynamic> body);
 
   @POST('/api/notes/hybrid-timeline')
   Future<List<Note>> getHybridTimeline(@Body() TimelineRequest request);
@@ -23,4 +26,7 @@ abstract class MisskeyApi {
 
   @POST('/api/emojis')
   Future<List<Emoji>> getEmojis();
+
+  @POST('/api/i')
+  Future<User> getMyProfile(@Body() MyProfileRequest request);
 }

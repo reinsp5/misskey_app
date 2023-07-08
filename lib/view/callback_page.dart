@@ -17,7 +17,10 @@ class CallbackPage extends ConsumerWidget {
     final token = ref.watch(miAuthTokenNotifierProvider(sessionId));
     final screen = token.when(
       loading: () => const CircularProgressIndicator(),
-      error: (e, s) => Text('Error: $e'),
+      error: (e, s) {
+        debugPrint('error: $e, $s');
+        return Text('エラーが発生しました。$e: $s');
+      },
       data: (token) {
         log('token: ${token.toJson()}');
         ref.read(authServiceNotifierProvider).saveToken(token: token.token);

@@ -5,10 +5,11 @@ import 'package:misskey_client/widget/mi_scafford.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final timelines = ref.watch(misskeyTimelineNotifierProvider);
+    // タイムラインの更新をスケジュールする
+    _reloadTimeline(ref);
     return MiScaffold(
       title: 'Misskey App',
       body: timelines.when(
@@ -16,30 +17,38 @@ class HomePage extends ConsumerWidget {
         error: (error, stackTrace) => Center(
           child: Text('エラーが発生しました。$error'),
         ),
-        data: (data) => RefreshIndicator(
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-            child: ListView.separated(
-              separatorBuilder: (context, index) => const Divider(),
-              itemCount: data.length,
-              itemBuilder: (context, index) {
-                final note = data[index];
-                return ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage: NetworkImage(note.user.avatarUrl ?? ''),
-                  ),
-                  title: Text(note.user.name ?? ''),
-                  subtitle: Text(note.text ?? ''),
-                );
-              },
+        data: (data) {
+          return RefreshIndicator(
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+              child: ListView.separated(
+                separatorBuilder: (context, index) => const Divider(),
+                itemCount: data.length,
+                itemBuilder: (context, index) {
+                  final note = data[index];
+
+                  return ListTile(
+                    leading: CircleAvatar(
+                      backgroundImage: NetworkImage(note.user.avatarUrl ?? ''),
+                    ),
+                    title: Text(note.user.name ?? ''),
+                    subtitle: Text(note.text ?? ''),
+                  );
+                },
+              ),
             ),
-          ),
-          onRefresh: () async {
-            ref.read(misskeyTimelineNotifierProvider.notifier).reload();
-          },
-        ),
+            onRefresh: () async {
+              ref.read(misskeyTimelineNotifierProvider.notifier).reload();
+            },
+          );
+        },
       ),
     );
+  }
+
+  // 30秒ごとにタイムラインを更新する
+  void _reloadTimeline(WidgetRef ref) {
+    ref.read(misskeyTimelineNotifierProvider.notifier).reloadScheduler();
   }
 }

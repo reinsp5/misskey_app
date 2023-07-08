@@ -126,7 +126,7 @@ class MisskeyApiNotifierProvider
 }
 
 String _$miAuthTokenNotifierHash() =>
-    r'9d23afbf875d93b95ca32f52a8f7913fe19204fc';
+    r'42b17a0c9bd7a9754907faac2fd94ce9260fe9a4';
 
 abstract class _$MiAuthTokenNotifier
     extends BuildlessAutoDisposeAsyncNotifier<CheckAuthResponse> {
@@ -241,7 +241,7 @@ final misskeyMetaNotifierProvider = AutoDisposeAsyncNotifierProvider<
 
 typedef _$MisskeyMetaNotifier = AutoDisposeAsyncNotifier<MetaResponse>;
 String _$misskeyTimelineNotifierHash() =>
-    r'0c753575a8e474a8c026822cfd6404c65a4824e6';
+    r'f4b3365f4553c4416585ccd734eef5358aab8187';
 
 /// See also [MisskeyTimelineNotifier].
 @ProviderFor(MisskeyTimelineNotifier)
@@ -257,4 +257,21 @@ final misskeyTimelineNotifierProvider = AutoDisposeAsyncNotifierProvider<
 );
 
 typedef _$MisskeyTimelineNotifier = AutoDisposeAsyncNotifier<List<Note>>;
+String _$misskeyMyProfileNotifierHash() =>
+    r'6d3e3fc793c345aa8519f1d19a085ce021c313c0';
+
+/// See also [MisskeyMyProfileNotifier].
+@ProviderFor(MisskeyMyProfileNotifier)
+final misskeyMyProfileNotifierProvider =
+    AutoDisposeAsyncNotifierProvider<MisskeyMyProfileNotifier, User>.internal(
+  MisskeyMyProfileNotifier.new,
+  name: r'misskeyMyProfileNotifierProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$misskeyMyProfileNotifierHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$MisskeyMyProfileNotifier = AutoDisposeAsyncNotifier<User>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
