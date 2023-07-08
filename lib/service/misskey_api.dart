@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:misskey_client/models/auth/check_auth_response.dart';
+import 'package:misskey_client/models/emoji/emoji.dart';
 import 'package:misskey_client/models/meta/meta_response.dart';
 import 'package:misskey_client/models/note/note.dart';
 import 'package:misskey_client/models/timeline/timeline_request.dart';
@@ -19,12 +20,7 @@ abstract class MisskeyApi {
 
   @POST('/api/meta')
   Future<MetaResponse> getMeta();
-}
 
-class MisskeyApiFactory {
-  MisskeyApi create(String baseUrl) {
-    Dio dio = Dio();
-    dio.options.headers['content-type'] = 'application/json';
-    return MisskeyApi(dio, baseUrl: baseUrl);
-  }
+  @POST('/api/emojis')
+  Future<List<Emoji>> getEmojis();
 }

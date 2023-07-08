@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:misskey_client/service/auth_service.dart';
 import 'package:misskey_client/view/auth_page.dart';
 import 'package:misskey_client/view/callback_page.dart';
 import 'package:misskey_client/view/home_page.dart';
 
-void main() {
+String? authToken = '';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  AuthService authService = AuthService();
+  authToken = await authService.getToken();
   runApp(
     const ProviderScope(
       child: MyApp(),
@@ -21,6 +27,12 @@ final _router = GoRouter(
       path: '/',
       builder: (context, state) {
         return const HomePage();
+      },
+      redirect: (context, state) {
+        if (authToken == '') {
+          return '/auth';
+        }
+        return null;
       },
     ),
     GoRoute(

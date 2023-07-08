@@ -7,7 +7,7 @@ part of 'misskey_api_state.dart';
 // **************************************************************************
 
 String _$misskeyApiNotifierHash() =>
-    r'0685c86b29ffd7da4c135823541a23cd447d524a';
+    r'e97039b622f97fe64a986bd9b41a8d25e7979b55';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -241,7 +241,7 @@ final misskeyMetaNotifierProvider = AutoDisposeAsyncNotifierProvider<
 
 typedef _$MisskeyMetaNotifier = AutoDisposeAsyncNotifier<MetaResponse>;
 String _$misskeyTimelineNotifierHash() =>
-    r'34d051623c8f685410c8c8a8ff7d9ab081aaa68a';
+    r'0c753575a8e474a8c026822cfd6404c65a4824e6';
 
 /// See also [MisskeyTimelineNotifier].
 @ProviderFor(MisskeyTimelineNotifier)

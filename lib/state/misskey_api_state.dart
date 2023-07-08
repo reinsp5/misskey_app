@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:misskey_client/models/auth/check_auth_response.dart';
 import 'package:misskey_client/models/meta/meta_response.dart';
 import 'package:misskey_client/models/note/note.dart';
@@ -12,7 +13,9 @@ part 'misskey_api_state.g.dart';
 class MisskeyApiNotifier extends _$MisskeyApiNotifier {
   @override
   MisskeyApi build(String baseUrl) {
-    return MisskeyApiFactory().create(baseUrl);
+    Dio dio = Dio();
+    dio.options.headers['content-type'] = 'application/json';
+    return MisskeyApi(dio, baseUrl: baseUrl);
   }
 }
 
@@ -48,7 +51,16 @@ class MisskeyTimelineNotifier extends _$MisskeyTimelineNotifier {
     ));
   }
 
-  void reload() {
-    ref.refresh(misskeyTimelineNotifierProvider);
+  void reload() async {
+    state.value?.insertAll(
+      0,
+      await ref
+          .read(misskeyApiNotifierProvider('https://misskey.io'))
+          .getHybridTimeline(
+            TimelineRequest(
+              i: await ref.read(authServiceNotifierProvider).getToken(),
+            ),
+          ),
+    );
   }
 }
