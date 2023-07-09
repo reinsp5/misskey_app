@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:misskey_client/models/auth/check_auth_response.dart';
-import 'package:misskey_client/models/emoji/emoji.dart';
+import 'package:misskey_client/models/emoji/emoji_response.dart';
 import 'package:misskey_client/models/meta/meta_response.dart';
 import 'package:misskey_client/models/note/note.dart';
 import 'package:misskey_client/models/timeline/timeline_request.dart';
@@ -24,8 +24,8 @@ abstract class MisskeyApi {
   @POST('/api/meta')
   Future<MetaResponse> getMeta();
 
-  @POST('/api/emojis')
-  Future<List<Emoji>> getEmojis();
+  @GET('/api/emojis')
+  Future<EmojiResponse> getEmojis();
 
   @POST('/api/i')
   Future<User> getMyProfile(@Body() MyProfileRequest request);

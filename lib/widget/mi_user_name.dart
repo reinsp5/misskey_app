@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:misskey_client/models/emoji/emoji.dart';
-import 'package:misskey_client/models/note/note.dart';
 import 'package:misskey_client/state/misskey_api_state.dart';
-import 'package:misskey_client/widget/mi_user_name.dart';
 
-class MiNote extends ConsumerWidget {
-  MiNote({Key? key, required this.note}) : super(key: key);
+class MiUserName extends ConsumerWidget {
+  MiUserName({Key? key, required this.userName}) : super(key: key);
 
-  Note note;
+  String userName;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -23,14 +21,14 @@ class MiNote extends ConsumerWidget {
         },
         data: (emojiList) {
           RegExp exp = RegExp(r':([^:\s]*):');
-          Iterable<RegExpMatch> matches = exp.allMatches(note.text ?? '');
+          Iterable<RegExpMatch> matches = exp.allMatches(userName);
           int previousEnd = 0;
 
           for (var match in matches) {
             if (match.start > previousEnd) {
               widgetSpans.add(
                 WidgetSpan(
-                  child: Text(note.text!.substring(previousEnd, match.start)),
+                  child: Text(userName!.substring(previousEnd, match.start)),
                 ),
               );
             }
@@ -56,28 +54,17 @@ class MiNote extends ConsumerWidget {
             previousEnd = match.end;
           }
 
-          if (previousEnd < note.text!.length) {
+          if (previousEnd < userName!.length) {
             widgetSpans.add(
               WidgetSpan(
-                child: Text(note.text!.substring(previousEnd)),
+                child: Text(userName!.substring(previousEnd)),
               ),
             );
           }
 
-          return ListTile(
-            leading: CircleAvatar(
-              backgroundImage: NetworkImage(note.user.avatarUrl ?? ''),
-            ),
-            title: MiUserName(userName: note.user.name ?? ''),
-            subtitle: Padding(
-              padding: const EdgeInsets.only(
-                top: 16.0,
-              ),
-              child: RichText(
-                text: TextSpan(
-                  children: widgetSpans,
-                ),
-              ),
+          return RichText(
+            text: TextSpan(
+              children: widgetSpans,
             ),
           );
         });

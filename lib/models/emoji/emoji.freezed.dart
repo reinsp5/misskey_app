@@ -21,6 +21,7 @@ Emoji _$EmojiFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Emoji {
   String? get id => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
   List<String>? get aliases => throw _privateConstructorUsedError;
   String? get category => throw _privateConstructorUsedError;
   String? get host => throw _privateConstructorUsedError;
@@ -38,6 +39,7 @@ abstract class $EmojiCopyWith<$Res> {
   @useResult
   $Res call(
       {String? id,
+      String? name,
       List<String>? aliases,
       String? category,
       String? host,
@@ -58,6 +60,7 @@ class _$EmojiCopyWithImpl<$Res, $Val extends Emoji>
   @override
   $Res call({
     Object? id = freezed,
+    Object? name = freezed,
     Object? aliases = freezed,
     Object? category = freezed,
     Object? host = freezed,
@@ -67,6 +70,10 @@ class _$EmojiCopyWithImpl<$Res, $Val extends Emoji>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String?,
       aliases: freezed == aliases
           ? _value.aliases
@@ -96,6 +103,7 @@ abstract class _$$_EmojiCopyWith<$Res> implements $EmojiCopyWith<$Res> {
   @useResult
   $Res call(
       {String? id,
+      String? name,
       List<String>? aliases,
       String? category,
       String? host,
@@ -112,6 +120,7 @@ class __$$_EmojiCopyWithImpl<$Res> extends _$EmojiCopyWithImpl<$Res, _$_Emoji>
   @override
   $Res call({
     Object? id = freezed,
+    Object? name = freezed,
     Object? aliases = freezed,
     Object? category = freezed,
     Object? host = freezed,
@@ -121,6 +130,10 @@ class __$$_EmojiCopyWithImpl<$Res> extends _$EmojiCopyWithImpl<$Res, _$_Emoji>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String?,
       aliases: freezed == aliases
           ? _value._aliases
@@ -147,6 +160,7 @@ class __$$_EmojiCopyWithImpl<$Res> extends _$EmojiCopyWithImpl<$Res, _$_Emoji>
 class _$_Emoji implements _Emoji {
   _$_Emoji(
       {this.id,
+      this.name,
       final List<String>? aliases,
       this.category,
       this.host,
@@ -158,6 +172,8 @@ class _$_Emoji implements _Emoji {
 
   @override
   final String? id;
+  @override
+  final String? name;
   final List<String>? _aliases;
   @override
   List<String>? get aliases {
@@ -177,7 +193,7 @@ class _$_Emoji implements _Emoji {
 
   @override
   String toString() {
-    return 'Emoji(id: $id, aliases: $aliases, category: $category, host: $host, url: $url)';
+    return 'Emoji(id: $id, name: $name, aliases: $aliases, category: $category, host: $host, url: $url)';
   }
 
   @override
@@ -186,6 +202,7 @@ class _$_Emoji implements _Emoji {
         (other.runtimeType == runtimeType &&
             other is _$_Emoji &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality().equals(other._aliases, _aliases) &&
             (identical(other.category, category) ||
                 other.category == category) &&
@@ -195,7 +212,7 @@ class _$_Emoji implements _Emoji {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id,
+  int get hashCode => Object.hash(runtimeType, id, name,
       const DeepCollectionEquality().hash(_aliases), category, host, url);
 
   @JsonKey(ignore: true)
@@ -215,6 +232,7 @@ class _$_Emoji implements _Emoji {
 abstract class _Emoji implements Emoji {
   factory _Emoji(
       {final String? id,
+      final String? name,
       final List<String>? aliases,
       final String? category,
       final String? host,
@@ -224,6 +242,8 @@ abstract class _Emoji implements Emoji {
 
   @override
   String? get id;
+  @override
+  String? get name;
   @override
   List<String>? get aliases;
   @override

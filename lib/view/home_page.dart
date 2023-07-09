@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:misskey_client/state/misskey_api_state.dart';
+import 'package:misskey_client/widget/mi_note.dart';
 import 'package:misskey_client/widget/mi_scafford.dart';
 
 class HomePage extends ConsumerWidget {
@@ -28,13 +29,7 @@ class HomePage extends ConsumerWidget {
                 itemBuilder: (context, index) {
                   final note = data[index];
 
-                  return ListTile(
-                    leading: CircleAvatar(
-                      backgroundImage: NetworkImage(note.user.avatarUrl ?? ''),
-                    ),
-                    title: Text(note.user.name ?? ''),
-                    subtitle: Text(note.text ?? ''),
-                  );
+                  return MiNote(note: note);
                 },
               ),
             ),

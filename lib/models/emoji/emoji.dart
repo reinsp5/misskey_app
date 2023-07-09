@@ -7,6 +7,7 @@ part 'emoji.g.dart';
 class Emoji with _$Emoji {
   factory Emoji({
     String? id,
+    String? name,
     List<String>? aliases,
     String? category,
     String? host,

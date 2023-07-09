@@ -8,6 +8,7 @@ part of 'emoji.dart';
 
 _$_Emoji _$$_EmojiFromJson(Map<String, dynamic> json) => _$_Emoji(
       id: json['id'] as String?,
+      name: json['name'] as String?,
       aliases:
           (json['aliases'] as List<dynamic>?)?.map((e) => e as String).toList(),
       category: json['category'] as String?,
@@ -17,6 +18,7 @@ _$_Emoji _$$_EmojiFromJson(Map<String, dynamic> json) => _$_Emoji(
 
 Map<String, dynamic> _$$_EmojiToJson(_$_Emoji instance) => <String, dynamic>{
       'id': instance.id,
+      'name': instance.name,
       'aliases': instance.aliases,
       'category': instance.category,
       'host': instance.host,
