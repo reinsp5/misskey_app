@@ -274,4 +274,21 @@ final misskeyMyProfileNotifierProvider =
 );
 
 typedef _$MisskeyMyProfileNotifier = AutoDisposeAsyncNotifier<User>;
+String _$misskeyEmojisNotifierHash() =>
+    r'4ef402731b8c4f1a8459997506f28862386c2e05';
+
+/// See also [MisskeyEmojisNotifier].
+@ProviderFor(MisskeyEmojisNotifier)
+final misskeyEmojisNotifierProvider = AutoDisposeAsyncNotifierProvider<
+    MisskeyEmojisNotifier, List<Emoji>>.internal(
+  MisskeyEmojisNotifier.new,
+  name: r'misskeyEmojisNotifierProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$misskeyEmojisNotifierHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$MisskeyEmojisNotifier = AutoDisposeAsyncNotifier<List<Emoji>>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

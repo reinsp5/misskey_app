@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:misskey_client/models/auth/check_auth_response.dart';
+import 'package:misskey_client/models/emoji/emoji.dart';
 import 'package:misskey_client/models/meta/meta_response.dart';
 import 'package:misskey_client/models/note/note.dart';
 import 'package:misskey_client/models/timeline/timeline_request.dart';
@@ -92,5 +93,15 @@ class MisskeyMyProfileNotifier extends _$MisskeyMyProfileNotifier {
         i: await authService.getToken(),
       ),
     );
+  }
+}
+
+@riverpod
+class MisskeyEmojisNotifier extends _$MisskeyEmojisNotifier {
+  @override
+  Future<List<Emoji>> build() async {
+    final misskeyApi =
+        ref.read(misskeyApiNotifierProvider('https://misskey.io'));
+    return misskeyApi.getEmojis();
   }
 }
