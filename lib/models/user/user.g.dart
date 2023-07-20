@@ -26,6 +26,10 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
           ? null
           : DateTime.parse(json['updatedAt'] as String),
       location: json['location'] as String?,
+      lang: json['lang'] as String?,
+      fields: (json['fields'] as List<dynamic>?)
+          ?.map((e) => e as Map<String, dynamic>)
+          .toList(),
       followersCount: json['followersCount'] as int?,
       followingCount: json['followingCount'] as int?,
       notesCount: json['notesCount'] as int?,
@@ -59,6 +63,8 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'createdAt': instance.createdAt?.toIso8601String(),
       'updatedAt': instance.updatedAt?.toIso8601String(),
       'location': instance.location,
+      'lang': instance.lang,
+      'fields': instance.fields,
       'followersCount': instance.followersCount,
       'followingCount': instance.followingCount,
       'notesCount': instance.notesCount,

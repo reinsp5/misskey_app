@@ -33,6 +33,8 @@ mixin _$User {
   DateTime? get createdAt => throw _privateConstructorUsedError;
   DateTime? get updatedAt => throw _privateConstructorUsedError;
   String? get location => throw _privateConstructorUsedError;
+  String? get lang => throw _privateConstructorUsedError;
+  List<Map<String, dynamic>>? get fields => throw _privateConstructorUsedError;
   int? get followersCount => throw _privateConstructorUsedError;
   int? get followingCount => throw _privateConstructorUsedError;
   int? get notesCount => throw _privateConstructorUsedError;
@@ -71,6 +73,8 @@ abstract class $UserCopyWith<$Res> {
       DateTime? createdAt,
       DateTime? updatedAt,
       String? location,
+      String? lang,
+      List<Map<String, dynamic>>? fields,
       int? followersCount,
       int? followingCount,
       int? notesCount,
@@ -112,6 +116,8 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? location = freezed,
+    Object? lang = freezed,
+    Object? fields = freezed,
     Object? followersCount = freezed,
     Object? followingCount = freezed,
     Object? notesCount = freezed,
@@ -179,6 +185,14 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as String?,
+      lang: freezed == lang
+          ? _value.lang
+          : lang // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fields: freezed == fields
+          ? _value.fields
+          : fields // ignore: cast_nullable_to_non_nullable
+              as List<Map<String, dynamic>>?,
       followersCount: freezed == followersCount
           ? _value.followersCount
           : followersCount // ignore: cast_nullable_to_non_nullable
@@ -255,6 +269,8 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       DateTime? createdAt,
       DateTime? updatedAt,
       String? location,
+      String? lang,
+      List<Map<String, dynamic>>? fields,
       int? followersCount,
       int? followingCount,
       int? notesCount,
@@ -292,6 +308,8 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? location = freezed,
+    Object? lang = freezed,
+    Object? fields = freezed,
     Object? followersCount = freezed,
     Object? followingCount = freezed,
     Object? notesCount = freezed,
@@ -359,6 +377,14 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as String?,
+      lang: freezed == lang
+          ? _value.lang
+          : lang // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fields: freezed == fields
+          ? _value._fields
+          : fields // ignore: cast_nullable_to_non_nullable
+              as List<Map<String, dynamic>>?,
       followersCount: freezed == followersCount
           ? _value.followersCount
           : followersCount // ignore: cast_nullable_to_non_nullable
@@ -432,6 +458,8 @@ class _$_User implements _User {
       required this.createdAt,
       required this.updatedAt,
       required this.location,
+      required this.lang,
+      required final List<Map<String, dynamic>>? fields,
       required this.followersCount,
       required this.followingCount,
       required this.notesCount,
@@ -445,7 +473,8 @@ class _$_User implements _User {
       required final List<String>? pinnedNoteIds,
       required final List<Note>? pinnedNotes,
       required this.host})
-      : _pinnedNoteIds = pinnedNoteIds,
+      : _fields = fields,
+        _pinnedNoteIds = pinnedNoteIds,
         _pinnedNotes = pinnedNotes;
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
@@ -476,6 +505,18 @@ class _$_User implements _User {
   final DateTime? updatedAt;
   @override
   final String? location;
+  @override
+  final String? lang;
+  final List<Map<String, dynamic>>? _fields;
+  @override
+  List<Map<String, dynamic>>? get fields {
+    final value = _fields;
+    if (value == null) return null;
+    if (_fields is EqualUnmodifiableListView) return _fields;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final int? followersCount;
   @override
@@ -521,7 +562,7 @@ class _$_User implements _User {
 
   @override
   String toString() {
-    return 'User(id: $id, username: $username, name: $name, url: $url, avatarUrl: $avatarUrl, avatarBlurhash: $avatarBlurhash, bannerUrl: $bannerUrl, bannerBlurhash: $bannerBlurhash, description: $description, birthday: $birthday, createdAt: $createdAt, updatedAt: $updatedAt, location: $location, followersCount: $followersCount, followingCount: $followingCount, notesCount: $notesCount, isCat: $isCat, isBot: $isBot, isAdmin: $isAdmin, isModerator: $isModerator, isLocked: $isLocked, hasUnreadSpecifiedNotes: $hasUnreadSpecifiedNotes, hasUnreadMentions: $hasUnreadMentions, pinnedNoteIds: $pinnedNoteIds, pinnedNotes: $pinnedNotes, host: $host)';
+    return 'User(id: $id, username: $username, name: $name, url: $url, avatarUrl: $avatarUrl, avatarBlurhash: $avatarBlurhash, bannerUrl: $bannerUrl, bannerBlurhash: $bannerBlurhash, description: $description, birthday: $birthday, createdAt: $createdAt, updatedAt: $updatedAt, location: $location, lang: $lang, fields: $fields, followersCount: $followersCount, followingCount: $followingCount, notesCount: $notesCount, isCat: $isCat, isBot: $isBot, isAdmin: $isAdmin, isModerator: $isModerator, isLocked: $isLocked, hasUnreadSpecifiedNotes: $hasUnreadSpecifiedNotes, hasUnreadMentions: $hasUnreadMentions, pinnedNoteIds: $pinnedNoteIds, pinnedNotes: $pinnedNotes, host: $host)';
   }
 
   @override
@@ -552,6 +593,8 @@ class _$_User implements _User {
                 other.updatedAt == updatedAt) &&
             (identical(other.location, location) ||
                 other.location == location) &&
+            (identical(other.lang, lang) || other.lang == lang) &&
+            const DeepCollectionEquality().equals(other._fields, _fields) &&
             (identical(other.followersCount, followersCount) ||
                 other.followersCount == followersCount) &&
             (identical(other.followingCount, followingCount) ||
@@ -594,6 +637,8 @@ class _$_User implements _User {
         createdAt,
         updatedAt,
         location,
+        lang,
+        const DeepCollectionEquality().hash(_fields),
         followersCount,
         followingCount,
         notesCount,
@@ -638,6 +683,8 @@ abstract class _User implements User {
       required final DateTime? createdAt,
       required final DateTime? updatedAt,
       required final String? location,
+      required final String? lang,
+      required final List<Map<String, dynamic>>? fields,
       required final int? followersCount,
       required final int? followingCount,
       required final int? notesCount,
@@ -680,6 +727,10 @@ abstract class _User implements User {
   DateTime? get updatedAt;
   @override
   String? get location;
+  @override
+  String? get lang;
+  @override
+  List<Map<String, dynamic>>? get fields;
   @override
   int? get followersCount;
   @override

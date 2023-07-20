@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:misskey_client/state/auth_service_state.dart';
 import 'package:misskey_client/state/misskey_api_state.dart';
-import 'package:misskey_client/widget/mi_scafford.dart';
+import 'package:misskey_client/widget/app_scaffold_widget.dart';
 
 class CallbackPage extends ConsumerWidget {
   const CallbackPage({Key? key, this.sessionId = ''}) : super(key: key);
@@ -73,7 +73,7 @@ class CallbackPage extends ConsumerWidget {
         );
       },
     );
-    return MiScaffold(
+    return AppScaffold(
       title: '認証結果',
       body: screen,
     );

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:misskey_client/state/misskey_api_state.dart';
-import 'package:misskey_client/widget/mi_note.dart';
-import 'package:misskey_client/widget/mi_scafford.dart';
+import 'package:misskey_client/widget/app_scaffold_widget.dart';
+import 'package:misskey_client/widget/note_widget.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -11,7 +11,7 @@ class HomePage extends ConsumerWidget {
     final timelines = ref.watch(misskeyTimelineNotifierProvider);
     // タイムラインの更新をスケジュールする
     _reloadTimeline(ref);
-    return MiScaffold(
+    return AppScaffold(
       title: 'Misskey App',
       body: timelines.when(
         loading: () => const Center(child: CircularProgressIndicator()),
@@ -29,7 +29,7 @@ class HomePage extends ConsumerWidget {
                 itemBuilder: (context, index) {
                   final note = data[index];
 
-                  return MiNote(note: note);
+                  return NoteWidget(note: note);
                 },
               ),
             ),

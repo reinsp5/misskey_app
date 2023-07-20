@@ -3,12 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:misskey_client/models/emoji/emoji.dart';
 import 'package:misskey_client/models/note/note.dart';
 import 'package:misskey_client/state/misskey_api_state.dart';
-import 'package:misskey_client/widget/mi_user_name.dart';
+import 'package:misskey_client/widget/username_widget.dart';
 
-class MiNote extends ConsumerWidget {
-  MiNote({Key? key, required this.note}) : super(key: key);
+class NoteWidget extends ConsumerWidget {
+  const NoteWidget({Key? key, required this.note}) : super(key: key);
 
-  Note note;
+  final Note note;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -68,7 +68,7 @@ class MiNote extends ConsumerWidget {
             leading: CircleAvatar(
               backgroundImage: NetworkImage(note.user.avatarUrl ?? ''),
             ),
-            title: MiUserName(userName: note.user.name ?? ''),
+            title: UserNameWidget(userName: note.user.name ?? ''),
             subtitle: Padding(
               padding: const EdgeInsets.only(
                 top: 16.0,

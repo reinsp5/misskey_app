@@ -1,9 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:misskey_client/service/auth_service.dart';
-import 'package:misskey_client/state/misskey_api_state.dart';
+import 'package:misskey_client/view/account/my_profile_page.dart';
 import 'package:misskey_client/view/auth_page.dart';
 import 'package:misskey_client/view/callback_page.dart';
 import 'package:misskey_client/view/home_page.dart';
@@ -44,14 +42,21 @@ class AppRouterNotifier extends _$AppRouterNotifier {
         ),
         // 認証コールバック画面
         GoRoute(
-            path: '/callback',
-            builder: (context, state) {
-              final session = state.queryParameters['session'] ?? '';
-              debugPrint('session: $session');
-              return CallbackPage(
-                sessionId: session,
-              );
-            }),
+          path: '/callback',
+          builder: (context, state) {
+            final session = state.queryParameters['session'] ?? '';
+            debugPrint('session: $session');
+            return CallbackPage(
+              sessionId: session,
+            );
+          },
+        ),
+        GoRoute(
+          path: '/mypage',
+          builder: (context, state) {
+            return const MyProfilePage();
+          },
+        ),
       ],
     );
   }

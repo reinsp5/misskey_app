@@ -20,6 +20,8 @@ class User with _$User {
     required DateTime? createdAt,
     required DateTime? updatedAt,
     required String? location,
+    required String? lang,
+    required List<Map<String, dynamic>>? fields,
     required int? followersCount,
     required int? followingCount,
     required int? notesCount,

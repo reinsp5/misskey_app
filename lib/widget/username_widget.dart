@@ -3,10 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:misskey_client/models/emoji/emoji.dart';
 import 'package:misskey_client/state/misskey_api_state.dart';
 
-class MiUserName extends ConsumerWidget {
-  MiUserName({Key? key, required this.userName}) : super(key: key);
+class UserNameWidget extends ConsumerWidget {
+  const UserNameWidget({Key? key, required this.userName}) : super(key: key);
 
-  String userName;
+  final String userName;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:misskey_client/models/auth/check_auth_response.dart';
-import 'package:misskey_client/models/emoji/emoji.dart';
 import 'package:misskey_client/models/emoji/emoji_response.dart';
 import 'package:misskey_client/models/meta/meta_response.dart';
 import 'package:misskey_client/models/note/note.dart';

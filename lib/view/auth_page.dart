@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:misskey_client/state/misskey_api_state.dart';
-import 'package:misskey_client/widget/mi_scafford.dart';
+import 'package:misskey_client/widget/app_scaffold_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:uuid/uuid.dart';
 
@@ -19,7 +19,7 @@ class AuthPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final meta = ref.watch(misskeyMetaNotifierProvider);
-    return MiScaffold(
+    return AppScaffold(
       title: "認証",
       body: meta.when(
         loading: () => const Center(child: CircularProgressIndicator()),
